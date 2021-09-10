@@ -1,4 +1,4 @@
-import { h, inject, ref, onBeforeUpdate } from 'vue';
+import { h, inject, ref, onBeforeUpdate, watch } from 'vue';
 import { makeTextClass } from './../../utils/class.util';
 
 export const VHAccordionItem = {
@@ -58,15 +58,17 @@ export const VHAccordionItem = {
                 return slots.default();
             }
         };
-        onBeforeUpdate(() => {
+        const updateClass = () => {
             if (show() === true) {
-                classNameBody.value = `'accordion-collapse collapse show`;
+                classNameBody.value = 'accordion-collapse collapse show';
                 classNameButton.value = 'accordion-button';
             } else {
                 classNameBody.value = 'accordion-collapse collapse';
                 classNameButton.value = 'accordion-button collapsed';
             }
-        });
+        }
+        watch(showItem, updateClass);
+        onBeforeUpdate(updateClass);
         // return the render function
         return () =>
             h(

@@ -24,6 +24,9 @@ export const VHAccordion = {
         const setShowItem = (idx, flg) => {
             if (flush) showItem.value = [];
             showItem.value[idx] = flg;
+            if (!flg) {
+                delete showItem.value[idx];
+            }
             emit('showItem', { index: idx, show: flg });
         };
         const addItemIndex = () => {
