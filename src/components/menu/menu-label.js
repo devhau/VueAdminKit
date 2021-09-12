@@ -1,8 +1,8 @@
-import { h, resolveComponent } from 'vue';
+import { h } from 'vue';
 import { makeTextClass, } from './../../utils/class.util';
 
-export const VHMenuLink = {
-    name: 'vh-menu-link',
+export const VHMenuLabel = {
+    name: 'vh-menu-label',
     props: {
         class: {
             type: String,
@@ -10,10 +10,7 @@ export const VHMenuLink = {
         },
         tag: {
             type: String,
-            default: 'router-link'
-        },
-        router: {
-            default: null,
+            default: 'label'
         },
         icon: {
             type: String,
@@ -26,8 +23,7 @@ export const VHMenuLink = {
     },
     setup(props, { attrs }) {
         const { class: classProps, tag, icon, title } = props;
-        let router = props.router;
-        let className = makeTextClass('vh-menu-link', '', classProps, '');
+        let className = makeTextClass('vh-menu-label', '', classProps, '');
         let contentTitle = () => {
             if (icon) {
                 return [h('i', {
@@ -36,23 +32,14 @@ export const VHMenuLink = {
             }
             return [title];
         }
-        if (router === null || router === '') {
-            router = {
-                path: '/'
-            };
-        }
-
-        const RouterLink = resolveComponent(tag);
         // return the render function
         return () =>
             h(
-                RouterLink,
+                tag,
                 {
                     ...attrs,
                     class: className,
-                    to: router,
-                },
-                contentTitle()
+                }, contentTitle()
             );
     }
 };

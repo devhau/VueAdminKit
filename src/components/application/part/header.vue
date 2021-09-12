@@ -1,33 +1,40 @@
 <template>
   <nav class="vh-header">
-    <ul class="vh-menu">
-      <li class="vh-menu-item">
-        <a
-          class="vh-menu-link"
-          data-widget="pushmenu"
-          href="#"
-          role="button"
-          @click.prevent="touchLayout"
-        ><i class="bi bi-grid-3x3-gap"></i></a>
-      </li>
-      <li class="vh-menu-item">
-        <a
-          href="../index3.html"
-          class="vh-menu-link"
-        >Home</a>
-      </li>
-      <li class="vh-menu-item">
-        <a
-          href="#"
-          class="vh-menu-link"
-        >Contact{{layout}}</a>
-      </li>
-    </ul>
+    <span
+      class="vh-app-sidebar"
+      @click="touchLayout"
+    >
+      <i class="bi bi-list"></i>
+    </span>
+    <vh-menu
+      :source="menu"
+      class="vh-menu-top vh-menu-left"
+    />
+    <vh-flex-auto />
+    <vh-menu
+      :source="menu"
+      class="vh-menu-top vh-menu-right"
+    />
+    <profile />
   </nav>
 </template>
 <script>
 import { mapActions, mapState } from 'vuex';
+import profile from './profile.vue';
+
 export default {
+  components: {
+    profile
+  },
+  created() {
+    const { top } = this.$menu;
+    this.menu = top;
+  },
+  data() {
+    return {
+      menu: null,
+    };
+  },
   computed: {
     ...mapState(['layout']),
   },
