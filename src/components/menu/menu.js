@@ -34,7 +34,7 @@ export const VHMenu = {
                         idx: index,
                     }));
             }
-            return slots.default();
+            return slots?.default?.();
         }
         // return the render function
         return () =>
@@ -43,7 +43,7 @@ export const VHMenu = {
                 {
                     ...attrs,
                     class: className
-                }, 
+                },
                 children()
             );
     }

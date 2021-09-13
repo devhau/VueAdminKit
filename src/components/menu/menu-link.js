@@ -1,5 +1,5 @@
 import { h, resolveComponent } from 'vue';
-import { makeTextClass, } from './../../utils/class.util';
+import { makeTextClass } from './../../utils/class.util';
 
 export const VHMenuLink = {
     name: 'vh-menu-link',
@@ -32,9 +32,9 @@ export const VHMenuLink = {
             if (icon) {
                 return [h('i', {
                     class: icon,
-                }), title];
+                }), h('label', {}, title)];
             }
-            return [title];
+            return [h('label', {}, title)];
         }
         if (router === null || router === '') {
             router = {
@@ -51,8 +51,7 @@ export const VHMenuLink = {
                     ...attrs,
                     class: className,
                     to: router,
-                },
-                contentTitle()
+                }, contentTitle
             );
     }
 };

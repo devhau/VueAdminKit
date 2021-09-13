@@ -7,12 +7,14 @@
       <i class="bi bi-list"></i>
     </span>
     <vh-menu
-      :source="menu"
+      v-if="menuLeft&&menuLeft.length>0"
+      :source="menuLeft"
       class="vh-menu-top vh-menu-left"
     />
     <vh-flex-auto />
     <vh-menu
-      :source="menu"
+      v-if="menuRight&&menuRight.length>0"
+      :source="menuRight"
       class="vh-menu-top vh-menu-right"
     />
     <profile />
@@ -28,11 +30,13 @@ export default {
   },
   created() {
     const { top } = this.$menu;
-    this.menu = top;
+    this.menuLeft = top?.left;
+    this.menuRight = top?.right;
   },
   data() {
     return {
-      menu: null,
+      menuLeft: null,
+      menuRight: null,
     };
   },
   computed: {

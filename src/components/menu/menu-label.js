@@ -10,7 +10,7 @@ export const VHMenuLabel = {
         },
         tag: {
             type: String,
-            default: 'label'
+            default: 'p'
         },
         icon: {
             type: String,
@@ -28,9 +28,9 @@ export const VHMenuLabel = {
             if (icon) {
                 return [h('i', {
                     class: icon,
-                }), title];
+                }), h('label', {}, title)];
             }
-            return [title];
+            return [h('label', {}, title)];
         }
         // return the render function
         return () =>

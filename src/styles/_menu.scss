@@ -4,9 +4,9 @@
     padding: 0;
 
     &.vh-menu-sub {
-        margin-left: 30px;
+        transition: margin-left 0.1s ease-in-out, width 0.1s ease-in-out;
+        margin-left: 15px;
         min-width: 100%;
-        position: absolute;
         display: none;
         &.active,
         &:hover {
@@ -23,13 +23,14 @@
         }
         .vh-menu-link,
         .vh-menu-label {
-            padding: 12px;
+            padding: 10px;
+            margin: 0;
             display: block;
             text-decoration: none;
             color: #343a40;
             i {
                 padding-left: 2px;
-                padding-right: 7px;
+                padding-right: 5px;
             }
             &:hover {
                 background: #343a40;
@@ -42,18 +43,47 @@
 .vh-menu-top {
     & > .vh-menu-item {
         float: left;
-        border-right: 1px solid #343a40;
         &:last-child {
             border-right: none;
         }
     }
     .vh-menu-sub {
-        
         z-index: 99;
         min-width: 100%;
-        .vh-menu-sub {
-            margin-left: 30px;
+        margin-left: 25px;
+        position: absolute;
+        .vh-menu-item {
+            min-width: 100%;
+            float: unset;
+            background: #fff;
+            border-bottom: #343a40 1px solid;
         }
+    }
+}
+
+.vh-menu-sidebar {
+    overflow: auto;
+    * {
+        color: #e4e2e2;
+    }
+    .vh-menu-item {
+        &:last-child {
+            border-right: none;
+        }
+        .vh-menu-link,
+        .vh-menu-label {
+            &:hover {
+                background: rgb(136, 130, 130);
+                * {
+                    color: #e4e2e2 !important;
+                }
+                cursor: pointer;
+            }
+        }
+    }
+    .vh-menu-sub {
+        z-index: 99;
+        min-width: 100%;
         .vh-menu-item {
             min-width: 100%;
             float: unset;

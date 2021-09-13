@@ -1,6 +1,6 @@
 
 import { createStore } from 'vuex';
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import { moduleToRouter } from './utils/vh.util';
 import VHComponent from './components/';
 import system from './store/system';
@@ -36,7 +36,7 @@ export default (app, option) => {
         routesConfigs = [...moduleRouter, ...routesConfigs];
     }
     const router = createRouter({
-        history: createWebHistory(),
+        history: createWebHashHistory(),
         routes: routesConfigs,
     });
     app.use(router);
