@@ -2,11 +2,11 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    position: relative;
 
-    &.vh-menu-sub {
+    .vh-menu-sub {
         transition: margin-left 0.1s ease-in-out, width 0.1s ease-in-out;
         margin-left: 15px;
-        min-width: 100%;
         display: none;
         &.active,
         &:hover {
@@ -14,8 +14,8 @@
         }
     }
     .vh-menu-item {
+        max-width: 500px;
         position: relative;
-        border: 1;
         margin: 0;
         padding: 0;
         &:hover > .vh-menu-sub {
@@ -34,8 +34,10 @@
             }
             &:hover {
                 background: #343a40;
-                color: #fff;
-                cursor: pointer;
+                * {
+                    cursor: pointer;
+                    color: #fff;
+                }
             }
         }
     }
@@ -46,12 +48,19 @@
         &:last-child {
             border-right: none;
         }
+        & > .vh-menu-sub {
+            width: 100%;
+        }
     }
+    * {
+        color: rgba(0, 0, 0, 0.5);
+    }
+
     .vh-menu-sub {
         z-index: 99;
-        min-width: 100%;
-        margin-left: 25px;
+        margin-left: 35px;
         position: absolute;
+        min-width: 100%;
         .vh-menu-item {
             min-width: 100%;
             float: unset;
@@ -67,6 +76,7 @@
         color: #e4e2e2;
     }
     .vh-menu-item {
+        min-width: 100%;
         &:last-child {
             border-right: none;
         }
@@ -83,12 +93,9 @@
     }
     .vh-menu-sub {
         z-index: 99;
-        min-width: 100%;
+        width: calc(100% - 15px);
         .vh-menu-item {
-            min-width: 100%;
-            float: unset;
-            background: #fff;
-            border-bottom: #343a40 1px solid;
+            width: 100%;
         }
     }
 }

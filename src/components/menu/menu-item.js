@@ -25,20 +25,24 @@ export const VHMenuItem = {
             type: String,
             default: ''
         },
+        level: {
+            type: Number,
+            default: 0
+        },
         sub: {
             type: Array,
             default: null
         }
     },
     setup(props, { attrs }) {
-        const { class: classProps, tag, sub, router, icon, title } = props;
+        const { class: classProps, tag, sub, router, icon, title, level } = props;
         let className = makeTextClass('vh-menu-item', '', classProps, '');
 
         const children = () => {
             if (sub != null && sub.length > 0) {
                 const MenuSub = resolveComponent(VHMenuSub.name);
                 return h(MenuSub, {
-                    icon, title, sub
+                    icon, title, sub, level
                 });
             } else {
                 const MenuLink = resolveComponent(VHMenuLink.name);

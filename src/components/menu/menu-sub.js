@@ -18,15 +18,18 @@ export const VHMenuSub = {
             type: String,
             default: ''
         },
+        level: {
+            type: Number,
+            default: 0
+        },
         sub: {
             type: Array,
             default: null
         }
     },
     setup(props) {
-        const { class: classProps, sub, icon, title } = props;
+        const { class: classProps, sub, icon, title, level } = props;
         let className = makeTextClass('vh-menu-sub', '', classProps, '');
-
         const MenuLabel = resolveComponent(VHMenuLabel.name);
         const Menu = resolveComponent(VHMenu.name);
         // return the render function
@@ -36,7 +39,8 @@ export const VHMenuSub = {
             }),
             h(Menu, {
                 source: sub,
-                class: className
+                class: className,
+                level
             })
         ];
     }

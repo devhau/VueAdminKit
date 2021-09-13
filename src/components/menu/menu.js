@@ -13,6 +13,10 @@ export const VHMenu = {
             type: String,
             default: 'ul'
         },
+        level: {
+            type: Number,
+            default: 0
+        },
         source: {
             type: Array,
             default: []
@@ -21,7 +25,11 @@ export const VHMenu = {
     setup(props, { slots, attrs }) {
         const { class: classProps, tag, source } = props;
         let className = makeTextClass('vh-menu', '', classProps, '');
-
+        let level = props.level;
+        if (level > 0) {
+            className = makeTextClass(className, 'vh-menu-level', level);
+        }
+        level = level + 1;
         const MenuItem = resolveComponent(VHMenuItem.name);
         let children = () => {
             if (source && source.length > 0) {
@@ -32,6 +40,7 @@ export const VHMenu = {
                         router: item.router,
                         sub: item.sub,
                         idx: index,
+                        level
                     }));
             }
             return slots?.default?.();

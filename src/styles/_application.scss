@@ -64,8 +64,22 @@
     &.vh-layout-mini {
         .vh-sidebar {
             width: 50px;
+            .vh-menu-sidebar {
+                .vh-menu-item {
+                    label {
+                        display: none;
+                    }
+                }
+            }
             &:hover {
                 width: 250px;
+                .vh-menu-sidebar {
+                    .vh-menu-item {
+                        label {
+                            display: unset;
+                        }
+                    }
+                }
             }
         }
         .vh-header,
