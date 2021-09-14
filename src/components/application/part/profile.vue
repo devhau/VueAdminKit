@@ -1,12 +1,12 @@
 <template>
   <div class="vh-profile">
-    Thông tin người dùng
+    <h5>Thông tin</h5>
   </div>
 </template>
 <script>
 export default {
-    setup() {
-        
-    },
+  setup() {
+
+  },
 }
 </script>

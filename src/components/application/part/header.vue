@@ -1,6 +1,7 @@
 <template>
   <nav class="vh-header">
     <span
+      v-if="showApp"
       class="vh-app-sidebar"
       @click="touchLayout"
     >
@@ -17,16 +18,18 @@
       :source="menuRight"
       class="vh-menu-top vh-menu-right"
     />
-    <profile />
+    <component :is="profile"></component>
   </nav>
 </template>
 <script>
 import { mapActions, mapState } from 'vuex';
-import profile from './profile.vue';
 
 export default {
-  components: {
-    profile
+  props: {
+    showApp: {
+      type: Boolean,
+      default: true
+    }
   },
   created() {
     const { top } = this.$menu;
@@ -41,6 +44,11 @@ export default {
   },
   computed: {
     ...mapState(['layout']),
+    profile() {
+      if (this.$system?.components?.profile)
+        return this.$system.components.profile(this);
+      return false;
+    }
   },
   methods: {
     ...mapActions(['touchLayout']),

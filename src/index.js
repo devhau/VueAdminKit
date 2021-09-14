@@ -3,16 +3,17 @@ import { createStore } from 'vuex';
 import { createRouter, createWebHashHistory } from 'vue-router';
 import { moduleToRouter } from './utils/vh.util';
 import VHComponent from './components/';
-import system from './store/system';
+import systemStore from './store/system';
+import optionDefault from './config';
 export default (app, option) => {
     app.use(VHComponent);
 
-    let { menu, module, store, routes } = option;
+    let { menu, module, store, routes, system } = Object.assign(optionDefault, option);
     /**
      * Store Setting
      */
     let storeConfig = {
-        ...system,
+        ...systemStore,
     }
     if (store) {
         storeConfig.module = {
@@ -42,4 +43,6 @@ export default (app, option) => {
     app.use(router);
     app.config.globalProperties.$menu = menu;
     app.config.globalProperties.$module = module;
+    app.config.globalProperties.$system = system;
+
 };
