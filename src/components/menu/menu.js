@@ -1,4 +1,4 @@
-import { h, resolveComponent } from 'vue';
+import { h, resolveComponent, getCurrentInstance } from 'vue';
 import { makeTextClass, } from './../../utils/class.util';
 import { VHMenuItem } from './menu-item';
 
@@ -41,7 +41,9 @@ export const VHMenu = {
                         sub: item.sub,
                         idx: index,
                         level
-                    }));
+                    })
+                });
+
             }
             return slots?.default?.();
         }
