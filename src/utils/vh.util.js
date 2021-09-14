@@ -1,5 +1,5 @@
-import { h } from 'vue';
-export const moduleToRouter = (modules) => {
+
+export const moduleToRouter = (modules, pageDefault) => {
     return Object.keys(modules).map((key) => {
         const item = modules[key];
         if (item.page) {
@@ -12,7 +12,7 @@ export const moduleToRouter = (modules) => {
             return {
                 path: `/${key}`,
                 name: item.name ?? key,
-                component: h('div', {}, 'Xin chào'),
+                component: pageDefault,
             }
         }
 

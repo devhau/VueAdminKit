@@ -24,6 +24,7 @@ export const VHMenu = {
     },
     setup(props, { slots, attrs }) {
         const { class: classProps, tag, source } = props;
+        const module = getCurrentInstance().appContext.config.globalProperties.$module;
         let className = makeTextClass('vh-menu', '', classProps, '');
         let level = props.level;
         if (level > 0) {
@@ -33,8 +34,22 @@ export const VHMenu = {
         const MenuItem = resolveComponent(VHMenuItem.name);
         let children = () => {
             if (source && source.length > 0) {
-                return source.map((item, index) =>
-                    h(MenuItem, {
+
+                return source.map((item, index) => {
+                    let moduleItem = undefined;
+                    if (item.module && item.module !== '' && (moduleItem = module[item.module]) != null) {
+                        return h(MenuItem, {
+                            title: moduleItem.title,
+                            icon: moduleItem.icon,
+                            router: {
+                                name: moduleItem.name,
+                            },
+                            sub: item.sub,
+                            idx: index,
+                            level
+                        })
+                    }
+                    return h(MenuItem, {
                         title: item.title,
                         icon: item.icon,
                         router: item.router,

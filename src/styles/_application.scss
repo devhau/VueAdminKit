@@ -55,6 +55,7 @@
                 .title-short {
                     color: #fff;
                     font-size: 21px;
+                    font-weight: 700;
                     padding: 11px;
                 }
                 .title-short {
@@ -69,6 +70,7 @@
             overflow: auto;
             padding-left: 250px;
             .vh-content {
+                position: relative;
                 margin: 0;
                 padding: 1px;
                 min-height: 100%;
@@ -88,6 +90,10 @@
             width: 50px;
             .vh-menu-sidebar {
                 .vh-menu-item {
+                    i {
+                        padding-left: 5px;
+                        padding-right: 5px;
+                    }
                     label {
                         display: none;
                     }
@@ -105,6 +111,10 @@
                 }
                 .vh-menu-sidebar {
                     .vh-menu-item {
+                        i {
+                            padding-left: 2px;
+                            padding-right: 5px;
+                        }
                         label {
                             display: unset;
                         }

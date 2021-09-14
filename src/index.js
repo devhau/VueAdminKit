@@ -5,6 +5,7 @@ import { moduleToRouter } from './utils/vh.util';
 import VHComponent from './components/';
 import systemStore from './store/system';
 import optionDefault from './config';
+import { VHPage } from './components/page/page';
 export default (app, option) => {
     app.use(VHComponent);
 
@@ -32,7 +33,7 @@ export default (app, option) => {
     if (routes && routes.length > 0) {
         routesConfigs = [...routes];
     }
-    const moduleRouter = moduleToRouter(module);
+    const moduleRouter = moduleToRouter(module, VHPage);
     if (moduleRouter && moduleRouter.length > 0) {
         routesConfigs = [...moduleRouter, ...routesConfigs];
     }
