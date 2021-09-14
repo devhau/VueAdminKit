@@ -8,11 +8,17 @@ export const VHPage = {
             type: String,
             default: '',
         },
+        config: {
+            default: null,
+        },
+        module: {
+            type: String,
+            default: '',
+        },
     },
     setup(props, { slots, attrs }) {
         const { class: classProps } = props;
         let className = makeTextClass('vh-page', '', classProps, '');
-
         // return the render function
         return () =>
             h(
