@@ -2,9 +2,21 @@
     min-width: 300px;
     .vh-column-header {
         position: relative;
-        min-width: 50px;
+        min-width: 25px;
+        .vh-column-button {
+            display: inline-flex;
+            flex-direction: row;
+            position: absolute;
+            top: 0px;
+            right: 5px;
+            .btn {
+                margin-right: 5px;
+                padding: 3px 6px;
+            }
+        }
         .vh-column-action {
-            display: none;
+            top: 33px;
+            border-radius: 0px 3px 3px 0px;
             position: absolute;
             min-height: 150px;
             width: 100%;
@@ -13,6 +25,10 @@
     }
     thead {
         tr {
+            .vh-column-25 {
+                min-width: 25px;
+                max-width: 225px;
+            }
             .vh-column-50 {
                 min-width: 50px;
                 max-width: 250px;

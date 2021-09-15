@@ -29,7 +29,7 @@
         </div>
       </div>
       <slot name="body-extend" />
-      <vh-table />
+      <vh-table :columns="columns" />
     </div>
 
     <div class="manager-footer">
@@ -51,6 +51,50 @@ export default {
       type: String,
       default: '',
     },
+  },
+  data() {
+    return {
+      columns: [{
+        title: 'index',
+        field: '',
+        format: '',
+        func: (row) => {
+          console.log(row);
+        }
+      },
+      {
+        title: 'Action',
+        field: '',
+        format: '',
+        func: (row) => {
+          console.log(row);
+        }
+      },
+      {
+        title: 'Action',
+        field: '',
+        format: '',
+        func: (row) => {
+          console.log(row);
+        }
+      },
+      {
+        title: 'Action',
+        field: '',
+        format: '',
+        func: (row) => {
+          console.log(row);
+        }
+      },
+      {
+        title: 'Action',
+        field: '',
+        format: '',
+        func: (row) => {
+          console.log(row);
+        }
+      }]
+    }
   },
   setup() {
 

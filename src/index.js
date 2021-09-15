@@ -5,8 +5,10 @@ import { moduleToRouter } from './utils/vh.util';
 import VHComponent from './components/';
 import systemStore from './store/system';
 import optionDefault from './config';
+import directives from './directives';
 import VHPageManager from './components/page/manager';
 export default (app, option) => {
+    app.use(directives);
     app.use(VHComponent);
 
     let { menu, module, store, routes, system } = Object.assign(optionDefault, option);

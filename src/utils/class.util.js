@@ -24,3 +24,6 @@ export const makeValueByData = (data, field, isDefaultData = true) => {
     }
     return null;
 }
+export const isFunction = (functionToCheck) => {
+    return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
+}

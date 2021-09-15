@@ -1,9 +1,61 @@
 <template>
-  <div class="vh-column-header">
+  <div
+    class="vh-column-header"
+    v-click-outside="doOutside"
+  >
     <span>
-      Nội dung
+      {{column?.title}}
     </span>
-    <div class="vh-column-action">
+    <div class="vh-column-button">
+      <button
+        @click="sort=!sort"
+        class="btn btn-sm btn-outline-primary"
+      >
+        <i
+          v-if="sort"
+          class="bi bi-sort-alpha-down"
+        ></i>
+        <i
+          v-else
+          class="bi bi-sort-alpha-up"
+        ></i>
+      </button>
+      <button
+        @click="action=!action"
+        class="btn btn-sm btn-outline-primary"
+      >
+        <i class="bi bi-funnel"></i>
+      </button>
+    </div>
+    <div
+      v-if="action"
+      class="vh-column-action"
+    >
     </div>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    column: {
+      default: undefined,
+    },
+  },
+  data() {
+    return {
+      sort: false,
+      action: false
+    }
+  },
+  methods: {
+    doOutside() {
+      if (this.action) {
+        this.action = false;
+      }
+    },
+  },
+  setup() {
+
+  },
+}
+</script>
