@@ -9,7 +9,7 @@ export const moduleToRouter = (modules, pageDefault) => {
                 meta: {
                     module: key,
                 },
-                props: { config: item, module: key },
+                props: { module: item },
                 component: item.page,
             }
         } else {
@@ -19,7 +19,7 @@ export const moduleToRouter = (modules, pageDefault) => {
                 meta: {
                     module: key,
                 },
-                props: { config: item, module: key },
+                props: { module: item },
                 component: pageDefault,
             }
         }

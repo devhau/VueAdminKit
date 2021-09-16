@@ -4,8 +4,8 @@
       <thead class="table-light">
         <tr>
           <td
-            class="vh-column-150"
             v-for="(column,index) in columns"
+            :class="`vh-column-${column.size??'100'}`"
             :key="index"
           >
             <Header
@@ -20,21 +20,21 @@
         <tr
           v-for="(row,rowIndex) in source"
           :key="rowIndex"
-          :style="doRowStyle(row)"
+          :style="doRowStyle({row,rowIndex})"
+          @dblclick="$emit('rowclick',{row,rowIndex})"
         >
           <td
             v-for="(column,colIndex) in columns"
             :key="colIndex"
-            :style="doCellStyle(row,column)"
+            :style="doCellStyle({row,column,rowIndex})"
           >
-            <span
+            <vh-render-node
               v-if="column.func"
-              v-html="column.func(row,column)"
-            >
-            </span>
+              :node="column.func({row,column,rowIndex})"
+            />
             <span
               v-else
-              v-html="doFormat(row[column.field],column.format)"
+              v-html="doFormat(row[column.field],column.format,rowIndex)"
             >
             </span>
 
@@ -95,16 +95,16 @@ export default {
       console.log(format);
       return value;
     },
-    doCellStyle(row, column) {
+    doCellStyle({ row, column, rowIndex }) {
       if (isFunction(column?.style)) {
-        return column?.style(row, column)
+        return column?.style({ row, column, rowIndex })
       } else if (column?.style != undefined && column?.style != '') {
         return column?.style;
       }
     },
-    doRowStyle(row) {
+    doRowStyle({ row, rowIndex }) {
       if (isFunction(this.rowStyle)) {
-        return this.rowStyle(row);
+        return this.rowStyle({ row, rowIndex });
       }
       if (this.rowStyle != undefined && this.rowStyle != '') {
         return this.rowStyle;

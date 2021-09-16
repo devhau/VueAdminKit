@@ -25,17 +25,25 @@
     }
     thead {
         tr {
+            .vh-column-10 {
+                min-width: 10px;
+                max-width: 30px;
+            }
+            .vh-column-15 {
+                min-width: 15px;
+                max-width: 50px;
+            }
             .vh-column-25 {
                 min-width: 25px;
-                max-width: 225px;
+                max-width: 125px;
             }
             .vh-column-50 {
                 min-width: 50px;
-                max-width: 250px;
+                max-width: 150px;
             }
             .vh-column-100 {
                 min-width: 100px;
-                max-width: 300px;
+                max-width: 200px;
             }
             .vh-column-150 {
                 min-width: 150px;
@@ -43,19 +51,19 @@
             }
             .vh-column-250 {
                 min-width: 250px;
-                max-width: 450px;
+                max-width: 350px;
             }
             .vh-column-350 {
                 min-width: 350px;
-                max-width: 550px;
+                max-width: 450px;
             }
             .vh-column-450 {
                 min-width: 450px;
-                max-width: 650px;
+                max-width: 550px;
             }
             .vh-column-550 {
                 min-width: 550px;
-                max-width: 750px;
+                max-width: 650px;
             }
         }
     }
