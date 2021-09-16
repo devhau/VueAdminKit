@@ -7,11 +7,14 @@ import systemStore from './store/system';
 import optionDefault from './config';
 import directives from './directives';
 import VHPageManager from './components/page/manager';
+import modules from './modules/index';
+
 export default (app, option) => {
     app.use(directives);
     app.use(VHComponent);
 
     let { menu, module, store, routes, system } = Object.assign(optionDefault, option);
+    module = Object.assign(modules, module);
     /**
      * Store Setting
      */

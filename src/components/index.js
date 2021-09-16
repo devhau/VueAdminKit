@@ -2,12 +2,14 @@ import LayoutComponent from './layout';
 import FormComponent from './form';
 import PageComponent from './page';
 import TableComponent from './table';
+import BuilderComponent from './builder';
 import MenuComponent from './menu';
 import CommonComponent from './common';
 import ButtonComponent from './button';
 import ApplicationComponent from './application';
 export default (app) => {
     app.use(ApplicationComponent);
+    app.use(BuilderComponent);
     app.use(TableComponent);
     app.use(PageComponent);
     app.use(MenuComponent);
