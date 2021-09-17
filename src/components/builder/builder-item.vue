@@ -1,5 +1,5 @@
 <template>
-  <div class="builder-item">
+  <div class="builder-item vh-draggable-item">
       {{modelValue.name}}
   </div>
 </template>

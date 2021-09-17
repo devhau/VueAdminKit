@@ -1,7 +1,7 @@
 .vh-kanban-board {
     width: 100%;
     height: 100%;
-    background: #fff;
+    background: #eee;
     margin: -1px;
     position: absolute;
     overflow: auto;
@@ -13,38 +13,67 @@
         flex: none;
         margin: 0px 15px;
         width: 300px;
-        min-height: 500px;
+        min-height: 40px;
         max-height: 100%;
-        background: #ccc;
-        border: 1px solid rgb(221, 196, 196);
-        border-radius: 3px;
         position: relative;
         overflow: hidden;
         display: flex;
-        flex-direction: column;
-        .vh-kanban-board-header {
-            flex: none;
+
+        &.vh-kanban-action-add-column {
             height: 50px;
-            line-height: 50px;
-            text-align: center;
-            font-weight: 700;
-            font-size: 16px;
-            color: #fff;
-        }
-        .vh-kanban-board-body {
-            flex: auto;
-            flex-direction: column;
+            display: inline-block;
+            background: rgb(228, 20, 20);
+            border: 1px solid rgb(221, 196, 196);
+            border-radius: 3px;
             padding: 10px;
-            overflow: auto;
-            .vh-kanban-board-card {
-                flex: none;
-                padding: 5px;
-                border-radius: 3px;
-                background: #fff;
-                flex: none;
-                min-height: 30px;
+            .form-control {
+                padding: 0.1rem 0.75rem;
+            }
+            label {
                 width: 100%;
-                margin: 10px 0px;
+                color: #fff;
+                font-weight: 700;
+            }
+        }
+        .vh-kanban-board-content {
+            width: 100%;
+            display: inline-block;
+            border-radius: 2px;
+            max-height: 100%;
+            position: relative;
+            overflow: hidden;
+            .vh-kanban-board-header {
+                height: 50px;
+                text-align: center;
+                font-weight: 700;
+                font-size: 16px;
+                color: #fff;
+                padding: 10px;
+                .form-control {
+                    padding: 0.1rem 0.75rem;
+                }
+                label {
+                    width: 100%;
+                    color: #fff;
+                    font-weight: 700;
+                }
+            }
+            .vh-kanban-board-body {
+                max-height: calc(100% - 50px);
+                background: #ccc;
+                border: 1px solid rgb(221, 196, 196);
+                padding: 10px;
+                overflow: auto;
+                height: fit-content;
+                .vh-kanban-board-card {
+                    padding: 5px;
+                    border-radius: 3px;
+                    background: #fff;
+                    flex: none;
+                    min-height: 30px;
+                    width: 100%;
+                    margin: 10px 0px;
+                }
             }
         }
     }

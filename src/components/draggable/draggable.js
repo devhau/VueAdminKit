@@ -65,6 +65,7 @@ const props = {
     type: Function,
     default: null
   },
+
   componentData: {
     type: Object,
     required: false,
@@ -107,7 +108,6 @@ const draggableComponent = defineComponent({
       if (classPros === undefined || classPros === '' || classPros.split(' ').indexOf('vh-draggable') < 0) {
         classPros = `${classPros} vh-draggable`.trim();
       }
-      console.log(classPros);
       this.componentStructure = componentStructure;
       const attributes = getComponentAttributes({ $attrs, componentData });
       return componentStructure.render(h, { ...attributes, class: classPros });
@@ -139,7 +139,7 @@ const draggableComponent = defineComponent({
         manageAndEmit: event => manageAndEmit.call(this, event),
         emit: event => emit.bind(this, event),
         manage: event => manage.call(this, event)
-      }
+      },
     });
     const targetDomElement = $el.nodeType === 1 ? $el : $el.parentElement;
     this._sortable = new Sortable(targetDomElement, sortableOptions);

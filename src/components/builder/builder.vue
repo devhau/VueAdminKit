@@ -45,6 +45,7 @@
           v-model="dataJson.config.columns"
           tag="div"
           itemKey="id"
+          :forceFallback="true"
         >
           <template #item="{element}">
             <BuilderItem :modelValue="element" />
