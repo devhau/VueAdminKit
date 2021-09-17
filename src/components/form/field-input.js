@@ -18,7 +18,6 @@ export const VHFieldInput = {
     name: 'vh-field-input',
     props: {
         modelValue: {
-            type: Object,
             default: null,
         },
         fieldType: {

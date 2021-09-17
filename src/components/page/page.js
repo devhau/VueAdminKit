@@ -8,12 +8,8 @@ export const VHPage = {
             type: String,
             default: '',
         },
-        config: {
-            default: null,
-        },
         module: {
-            type: String,
-            default: '',
+            default: null,
         },
     },
     setup(props, { slots, attrs }) {

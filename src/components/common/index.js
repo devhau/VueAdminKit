@@ -5,9 +5,7 @@ import { VHBreadcrumb } from './breadcrumb';
 import { VHBreadcrumbItem } from './breadcrumb-item';
 import { VHFlexAuto } from './flex-auto';
 import { VHRenderNode } from './render-node';
-//import draggable from 'vuedraggable';
 export default (app) => {
-    //app.component('vh-draggable', draggable);
     app.component(VHFlexAuto.name, VHFlexAuto);
     app.component(VHAccordion.name, VHAccordion);
     app.component(VHAccordionItem.name, VHAccordionItem);

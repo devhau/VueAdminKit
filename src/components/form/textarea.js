@@ -5,7 +5,6 @@ export const VHTextarea = {
     name: 'vh-textarea',
     props: {
         modelValue: {
-            type: String,
             default: '',
         },
         class: {

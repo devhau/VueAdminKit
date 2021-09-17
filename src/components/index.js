@@ -2,13 +2,17 @@ import LayoutComponent from './layout';
 import FormComponent from './form';
 import PageComponent from './page';
 import TableComponent from './table';
+import DraggableComponent from './draggable';
 import BuilderComponent from './builder';
 import MenuComponent from './menu';
 import CommonComponent from './common';
 import ButtonComponent from './button';
+import KanbanBoardComponent from './kanban-board';
 import ApplicationComponent from './application';
 export default (app) => {
     app.use(ApplicationComponent);
+    app.use(KanbanBoardComponent);
+    app.use(DraggableComponent);
     app.use(BuilderComponent);
     app.use(TableComponent);
     app.use(PageComponent);

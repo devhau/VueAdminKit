@@ -1,0 +1,10 @@
+.vh-draggable {
+    .sortable-chosen {
+        visibility: inherit !important;
+        background: transparent;
+        border: #666 2px dashed;
+    }
+    .sortable-ghost {
+        background: red;
+    }
+}

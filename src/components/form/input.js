@@ -6,7 +6,6 @@ export const VHInput = {
     name: 'vh-input',
     props: {
         modelValue: {
-            type: Object,
             default: null,
         },
         class: {

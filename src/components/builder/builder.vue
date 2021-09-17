@@ -1,6 +1,9 @@
 <template>
   <div class="vh-builder row m-0">
-    <div class="vh-builder-info col-md-6 col-sm-12">
+    <div
+      class="vh-builder-info col-md-6 col-sm-12"
+      v-if="dataJson"
+    >
       <div class="mb-3">
         <label
           for="data_input_name"
@@ -38,13 +41,24 @@
       <div>
       </div>
       <div v-if="dataJson.config?.columns">
+        <vh-draggable
+          v-model="dataJson.config.columns"
+          tag="div"
+          itemKey="id"
+        >
+          <template #item="{element}">
+            <BuilderItem :modelValue="element" />
+          </template>
+        </vh-draggable>
       </div>
     </div>
   </div>
 </template>
 <script>
+import BuilderItem from './builder-item.vue';
 export default {
   name: 'vh-builder',
+  components: { BuilderItem },
   props: {
     modelValue: {
       type: Object,
@@ -81,7 +95,7 @@ export default {
       dataJson.config = {};
     }
     if (dataJson.config.columns === undefined) {
-      dataJson.config.columns = [];
+      dataJson.config.columns = [{ id: 1, name: 'Hello 1' }, { id: 2, name: 'Hello 2' }, { id: 3, name: 'Hello 3' }, { id: 4, name: 'Hello 4' }, { id: 5, name: 'Hello 5' }];
     }
     if (dataJson.config.permission === undefined) {
       dataJson.config.permission = {};

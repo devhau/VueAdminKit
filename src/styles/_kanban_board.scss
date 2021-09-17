@@ -1,0 +1,51 @@
+.vh-kanban-board {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    margin: -1px;
+    position: absolute;
+    overflow: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding: 10px;
+    .vh-kanban-board-column {
+        flex: none;
+        margin: 0px 15px;
+        width: 300px;
+        min-height: 500px;
+        max-height: 100%;
+        background: #ccc;
+        border: 1px solid rgb(221, 196, 196);
+        border-radius: 3px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        .vh-kanban-board-header {
+            flex: none;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 16px;
+            color: #fff;
+        }
+        .vh-kanban-board-body {
+            flex: auto;
+            flex-direction: column;
+            padding: 10px;
+            overflow: auto;
+            .vh-kanban-board-card {
+                flex: none;
+                padding: 5px;
+                border-radius: 3px;
+                background: #fff;
+                flex: none;
+                min-height: 30px;
+                width: 100%;
+                margin: 10px 0px;
+            }
+        }
+    }
+}

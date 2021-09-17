@@ -3,7 +3,7 @@ export default {
     icon: 'bi bi-calendar4',
     title: 'Form Builder',
     name: 'builder',
-    page: () => PageBuilder,
+    page: PageBuilder,
     config: {
         permission: {
             index: 'user.index',
