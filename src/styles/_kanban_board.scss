@@ -18,6 +18,14 @@
         position: relative;
         overflow: hidden;
         display: flex;
+        .label-input {
+            .form-control {
+                padding: 0.1rem 0.75rem;
+            }
+            label {
+                width: 100%;
+            }
+        }
 
         &.vh-kanban-action-add-column {
             height: 50px;
@@ -26,13 +34,11 @@
             border: 1px solid rgb(221, 196, 196);
             border-radius: 3px;
             padding: 10px;
-            .form-control {
-                padding: 0.1rem 0.75rem;
-            }
-            label {
-                width: 100%;
-                color: #fff;
-                font-weight: 700;
+            .label-input {
+                label {
+                    font-weight: 700;
+                    color: #fff;
+                }
             }
         }
         .vh-kanban-board-content {

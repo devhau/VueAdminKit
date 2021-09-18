@@ -6,134 +6,82 @@
     group="vh-kanban-board-column"
     itemKey="id"
     :forceFallback="true"
-    :move="moveColumn"
-    filter="static"
   >
     <template #item="{element}">
-      <KanbanBoardItem :item="element" />
+      <div class="vh-kanban-board-column">
+        <div class="vh-kanban-board-content">
+          <div class="vh-kanban-board-header bg-primary">
+            <LabelInput
+              :modelValue="element.title"
+              @edit="(value)=>editTitle(element,value)"
+            />
+          </div>
+          <vh-draggable
+            v-model="element.cards"
+            tag="div"
+            class="vh-kanban-board-body"
+            group="vh-kanban-board-card"
+            itemKey="id"
+            :forceFallback="true"
+          >
+            <template #item="{element:elementSub}">
+              <div class="vh-kanban-board-card">
+                <LabelInput
+                  :modelValue="elementSub.name"
+                  @edit="(value)=>elementSub.name=value"
+                />
+              </div>
+            </template>
+            <template #footer>
+              <div class="vh-kanban-board-card bg-danger text-white">
+                <LabelInput
+                  label="<i class='bi bi-plus-lg'></i> Add Sub"
+                  @edit="(value)=>addSub(element,value)"
+                />
+              </div>
+            </template>
+          </vh-draggable>
+        </div>
+      </div>
     </template>
     <template #footer>
       <div class="vh-kanban-board-column vh-kanban-action-add-column">
-        <vh-input
-          ref="inputs"
-          v-if="showAddInput"
-          v-click-outside="hideInput"
-          v-model="ColumnTitle"
-          @keydown.esc="hideInput"
-          @keydown.enter="saveColumns"
+        <LabelInput
+          label="<i class='bi bi-plus-lg'></i> Add Card"
+          @edit="addTitle"
         />
-        <label
-          v-else
-          @dblclick="showInput"
-        ><i class="bi bi-plus-lg"></i> Add Card</label>
       </div>
     </template>
   </vh-draggable>
 </template>
 <script>
-import KanbanBoardItem from './kanban-board-item.vue'
+import LabelInput from './label-input.vue';
 export default {
   name: 'vh-kanban-board',
-  components: { KanbanBoardItem },
+  components: { LabelInput },
   data() {
     return {
-      ColumnTitle: '',
-      showAddInput: false,
-      dataJson: [
-        {
-          id: 1,
-          title: 'Doing',
-          cards: [
-            { id: 1, name: 'Task 1' },
-            { id: 2, name: 'Task 2' },
-            { id: 3, name: 'Task 3' },
-            { id: 4, name: 'Task 4' },
-            { id: 5, name: 'Task 5' },
-            { id: 6, name: 'Task 6' },
-            { id: 7, name: 'Task 7' },
-          ]
-        },
-        {
-          id: 2,
-          title: 'Process',
-          cards: [
-            { id: 1, name: 'Task 1' },
-            { id: 2, name: 'Task 2' },
-            { id: 3, name: 'Task 3' },
-            { id: 4, name: 'Task 4' },
-            { id: 5, name: 'Task 5' },
-            { id: 6, name: 'Task 6' },
-            { id: 7, name: 'Task 7' },
-            { id: 1, name: 'Task 1' },
-            { id: 2, name: 'Task 2' },
-            { id: 3, name: 'Task 3' },
-            { id: 4, name: 'Task 4' },
-            { id: 5, name: 'Task 5' },
-            { id: 6, name: 'Task 6' },
-            { id: 7, name: 'Task 7' },
-            { id: 1, name: 'Task 1' },
-            { id: 2, name: 'Task 2' },
-            { id: 3, name: 'Task 3' },
-            { id: 4, name: 'Task 4' },
-            { id: 5, name: 'Task 5' },
-            { id: 6, name: 'Task 6' },
-            { id: 7, name: 'Task 7' },
-            { id: 1, name: 'Task 1' },
-            { id: 2, name: 'Task 2' },
-            { id: 3, name: 'Task 3' },
-            { id: 4, name: 'Task 4' },
-            { id: 5, name: 'Task 5' },
-            { id: 6, name: 'Task 6' },
-            { id: 7, name: 'Task 7' },
-            { id: 1, name: 'Task 1' },
-            { id: 2, name: 'Task 2' },
-            { id: 3, name: 'Task 3' },
-            { id: 4, name: 'Task 4' },
-            { id: 5, name: 'Task 5' },
-            { id: 6, name: 'Task 6' },
-            { id: 7, name: 'Task 7' },
-          ]
-        },
-        {
-          id: 3,
-          title: 'Done',
-          cards: [
-            { id: 1, name: 'Task 1' },
-            { id: 2, name: 'Task 2' },
-            { id: 3, name: 'Task 3' },
-            { id: 4, name: 'Task 4' },
-            { id: 5, name: 'Task 5' },
-            { id: 6, name: 'Task 6' },
-            { id: 7, name: 'Task 7' },
-          ]
-        }
-      ]
+      dataJson: []
     }
   },
   methods: {
-    showInput() {
-      this.ColumnTitle = '';
-      this.showAddInput = true;
-      this.$refs.inputs.focus();
-    },
-    hideInput() {
-      if (this.showAddInput) {
-
-        this.ColumnTitle = "";
-        this.showAddInput = false;
+    addTitle(value) {
+      if (value) {
+        this.dataJson.push({ title: value, cards: [] });
       }
     },
-    saveColumns() {
-      const value = this.ColumnTitle;
-      this.dataJson.push({ title: value });
-      this.ColumnTitle = "";
-      this.showAddInput = false;
-    },
-    moveColumn(evt) {
-      if (parseInt(evt.draggedContext.futureIndex) > (this.dataJson.length - 3)) {
-        return true;
+    editTitle(item, value) {
+      if (value) {
+        item.title = value;
       }
-      return evt.related.className.indexOf('static') === -1;
+    },
+    addSub(item, value) {
+      if (item.cards === undefined) {
+        item.cards = [];
+      }
+      if (value) {
+        item.cards.push({ name: value });
+      }
     }
   },
   setup() {
