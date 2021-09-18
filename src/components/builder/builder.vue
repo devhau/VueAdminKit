@@ -1,50 +1,62 @@
 <template>
   <div class="vh-builder row m-0">
     <div
-      class="vh-builder-info col-md-6 col-sm-12"
+      class="vh-builder-info col-md-4 col-sm-12"
       v-if="dataJson"
     >
-      <div class="mb-3">
-        <label
-          for="data_input_name"
-          class="form-label"
-        >Name</label>
-        <vh-input
-          id="data_input_name"
-          v-model="dataJson.name"
-        />
+      <div class="p-2">
+        <h3>Builder Module</h3>
       </div>
       <div class="mb-3">
-        <label
-          for="data_input_title"
-          class="form-label"
-        >Title</label>
-        <vh-input
-          id="data_input_title"
-          v-model="dataJson.title"
-        />
+        <div class="input-group">
+          <span
+            class="input-group-text"
+            style="width:70px"
+          >Name</span>
+          <vh-input
+            id="data_input_name"
+            v-model="dataJson.name"
+          />
+        </div>
       </div>
       <div class="mb-3">
-        <label
-          for="data_input_title"
-          class="form-label"
-        >icon <span v-if="dataJson.icon&&dataJson.icon!=''">(<i :class="dataJson.icon" />)</span></label>
-        <vh-input
-          id="data_input_icon"
-          v-model="dataJson.icon"
-        />
+        <div class="input-group">
+          <span
+            class="input-group-text"
+            style="width:70px"
+          >Title</span>
+          <vh-input
+            id="data_input_title"
+            v-model="dataJson.title"
+          />
+        </div>
       </div>
-      <div>
+      <div class="mb-3">
+        <div class="input-group">
+          <span
+            class="input-group-text"
+            style="width:70px"
+          >icon
+            <span v-if="dataJson.icon&&dataJson.icon!=''">(<i :class="dataJson.icon" />)</span>
+          </span>
+          <vh-input
+            id="data_input_title"
+            v-model="dataJson.icon"
+          />
+        </div>
       </div>
     </div>
-    <div class="vh-builder-column col-md-6 col-sm-12">
+    <div class="vh-builder-column col-md-8 col-sm-12">
       <div class="p-2">
         <button
           class="btn btn-primary btn-sm"
           @click="addColumn"
         >Add Colum</button>
       </div>
-      <div v-if="dataJson.config?.columns">
+      <div
+        v-if="dataJson.config?.columns&&dataJson.config?.columns.length>0"
+        class="vh-height-500 p-2 border"
+      >
         <vh-draggable
           v-model="dataJson.config.columns"
           tag="div"
@@ -108,7 +120,7 @@ export default {
       dataJson.config.permission = {};
     }
     if (dataJson.config.columns === undefined) {
-      dataJson.config.columns = [{ id: 1, name: 'Hello 1' }, { id: 2, name: 'Hello 2' }, { id: 3, name: 'Hello 3' }, { id: 4, name: 'Hello 4' }, { id: 5, name: 'Hello 5' }];
+      dataJson.config.columns = [];
     }
     this.dataJson = dataJson;
   },

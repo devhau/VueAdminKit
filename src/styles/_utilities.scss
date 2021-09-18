@@ -1,3 +1,23 @@
 .vh-flex-auto {
     flex: 1 1 auto !important;
 }
+.vh-form-check {
+    display: inline-block;
+    margin: 2px;
+}
+.vh-height-500 {
+    overflow: auto;
+    max-height: 500px;
+}
+.vh-height-400 {
+    overflow: auto;
+    max-height: 400px;
+}
+.vh-height-300 {
+    overflow: auto;
+    max-height: 300px;
+}
+.vh-height-200 {
+    overflow: auto;
+    max-height: 200px;
+}

@@ -19,7 +19,7 @@ export default {
   },
   created() {
     if (this.source === null) {
-      this.source = Object.keys(this.$GridColumn);
+      this.source = Object.keys(this.$FieldType);
     }
     this.dataJson = this.modelValue;
     if (this.dataJson === null && !this.source) {

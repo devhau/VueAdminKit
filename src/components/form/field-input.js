@@ -1,19 +1,4 @@
 import { h } from 'vue';
-export const FieldType = {
-    text: {
-        name: 'text',
-        component: 'vh-input',
-    },
-    checkbox: {
-        name: 'checkbox',
-        component: 'vh-checkbox',
-    },
-    textarea: {
-        name: 'textarea',
-        component: 'vh-textarea',
-    }
-}
-
 export const VHFieldInput = {
     name: 'vh-field-input',
     props: {

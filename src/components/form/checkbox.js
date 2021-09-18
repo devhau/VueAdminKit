@@ -37,7 +37,7 @@ export const VHCheckbox = {
         // return the render function
         return () =>
             h('div', {
-                class: 'form-check',
+                class: 'form-check vh-form-check',
             },
                 h(
                     'input',
