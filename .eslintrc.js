@@ -12,7 +12,5 @@ module.exports = {
     "plugins": [
         "vue"
     ],
-    "rules": {
-        "vue/no-mutating-props": ["error", { "propProps": false }]
-    }
+    "rules": {}
 };

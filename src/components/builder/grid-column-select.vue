@@ -2,13 +2,15 @@
   <vh-select
     :source="source"
     v-model="dataJson"
+    isAll="true"
+    textAll="Choose Column"
   ></vh-select>
 </template>
 <script>
 export default {
   props: {
     modelValue: {
-      type: Object,
+      default: '',
     },
   },
   data() {

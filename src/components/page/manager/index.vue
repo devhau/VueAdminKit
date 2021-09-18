@@ -13,8 +13,8 @@
       <div class="row m-0 pb-2">
         <div class="col-lg col-md-12">
           <div class="row">
-            <div class="col-auto"><button class="btn btn-success"><i class="bi bi-plus-square"></i> Add</button></div>
-            <div class="col-auto"><button class="btn btn-info"><i class="bi bi-arrow-repeat"></i> Refresh</button></div>
+            <div class="col-auto"><button class="btn btn-primary"><i class="bi bi-plus-square"></i> Add</button></div>
+            <div class="col-auto"><button class="btn btn-success"><i class="bi bi-arrow-repeat"></i> Refresh</button></div>
             <slot name="body-button-extend" />
           </div>
         </div>
@@ -23,7 +23,7 @@
             placeholder="Search [CTRL + F]"
           ></div>
         <div class="col-lg-auto col-md-12">
-          <button class="btn btn-primary">
+          <button class="btn btn-secondary">
             <i class="bi bi-search"></i> Search
           </button>
         </div>
@@ -37,6 +37,7 @@
     </div>
 
     <div class="manager-footer">
+      <vh-builder-view :columns="getColumnUpdate" />
     </div>
   </div>
 </template>
@@ -48,6 +49,9 @@ export default {
   computed: {
     getConfig() {
       return Object.assign(pageManagerDefault, this.module.config);
+    },
+    getColumnUpdate() {
+      return this.getConfig.columns;
     },
     getCloumnView() {
       const { columns, isIndex, isAction } = this.getConfig;
@@ -67,6 +71,7 @@ export default {
       if (isAction) {
         columnViews = [...columnViews, {
           title: '',
+          size: 250,
           func: () => {
             return [
               h('button', {

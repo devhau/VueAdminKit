@@ -11,7 +11,6 @@ import modules from './modules/index';
 import { FieldType } from './components/form/field-type';
 
 import { GridColumn } from './components/builder/grid-column';
-import { console } from './utils/console.util';
 
 export default (app, option) => {
     app.use(directives);
@@ -56,5 +55,5 @@ export default (app, option) => {
     app.config.globalProperties.$system = system;
     app.config.globalProperties.$FieldType = Object.assign(FieldType, FieldType2);
     app.config.globalProperties.$GridColumn = Object.assign(GridColumn, GridColumn2);
-    console.log(app.config.globalProperties.$GridColumn);
+    app.provide('global', app.config.globalProperties);
 };

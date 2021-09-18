@@ -13,7 +13,6 @@ export default (app) => {
     app.use(ApplicationComponent);
     app.use(KanbanBoardComponent);
     app.use(DraggableComponent);
-    app.use(BuilderComponent);
     app.use(TableComponent);
     app.use(PageComponent);
     app.use(MenuComponent);
@@ -21,4 +20,5 @@ export default (app) => {
     app.use(CommonComponent);
     app.use(FormComponent);
     app.use(LayoutComponent);
+    app.use(BuilderComponent);
 };

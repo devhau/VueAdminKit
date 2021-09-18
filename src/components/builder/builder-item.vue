@@ -1,7 +1,12 @@
 <template>
   <div class="vh-builder-item vh-draggable-item">
-    <button class="btn btn-danger btn-sm">
-      <i class="bi bi-dash-circle"></i>
+    <button
+      class="btn btn-danger btn-sm"
+      @click="$emit('remove')"
+    >
+      <i class="
+      bi
+      bi-dash-circle"></i>
     </button>
     <div class="row">
       <div class="col-md-3">
@@ -25,7 +30,7 @@
       <div class="col-md-3">
         <div class="input-group">
           <span class="input-group-text">Size</span>
-          <GridColumnSelect v-model="item.solumn" />
+          <GridColumnSelect v-model="item.column" />
         </div>
       </div>
     </div>
@@ -34,6 +39,14 @@
         <vh-checkbox
           v-model="item.view"
           label="View"
+        />
+        <vh-checkbox
+          v-model="item.sort"
+          label="Sort"
+        />
+        <vh-checkbox
+          v-model="item.filter"
+          label="Filter"
         />
         <vh-checkbox
           v-model="item.add"

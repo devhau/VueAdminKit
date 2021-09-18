@@ -1,4 +1,5 @@
-import { h } from 'vue';
+import { h, resolveComponent, inject, watch, ref } from 'vue';
+import { isFunction } from '../../utils/class.util';
 export const VHFieldInput = {
     name: 'vh-field-input',
     props: {
@@ -11,10 +12,18 @@ export const VHFieldInput = {
         }
     },
     setup(props, { emit, attrs }) {
-        // return the render function
-        return () =>
-            h(
-                'vh-input',
+        let global = inject('global');
+        let input = ref(global.$FieldType[props.fieldType].component);
+        watch(() => props.fieldType, () => {
+            input.value = global.$FieldType[props.fieldType].component;
+
+        });
+        const children = () => {
+            if (isFunction(input.value)) {
+                return input.value();
+            }
+            return h(
+                resolveComponent(input.value),
                 {
                     ...attrs,
                     value: props.modelValue,
@@ -26,5 +35,8 @@ export const VHFieldInput = {
                     },
                 },
             );
+        };
+        // return the render function
+        return children;
     }
 };

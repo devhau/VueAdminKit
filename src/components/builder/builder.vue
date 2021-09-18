@@ -13,10 +13,7 @@
             class="input-group-text"
             style="width:70px"
           >Name</span>
-          <vh-input
-            id="data_input_name"
-            v-model="dataJson.name"
-          />
+          <vh-input v-model="dataJson.name" />
         </div>
       </div>
       <div class="mb-3">
@@ -25,10 +22,7 @@
             class="input-group-text"
             style="width:70px"
           >Title</span>
-          <vh-input
-            id="data_input_title"
-            v-model="dataJson.title"
-          />
+          <vh-input v-model="dataJson.title" />
         </div>
       </div>
       <div class="mb-3">
@@ -42,9 +36,22 @@
               :class="dataJson.icon"
             />
           </span>
-          <vh-input
-            id="data_input_title"
-            v-model="dataJson.icon"
+          <vh-input v-model="dataJson.icon" />
+        </div>
+      </div>
+      <div
+        class="mb-3"
+        v-if="dataJson.config?.columns&&dataJson.config?.columns.length>0"
+      >
+        <div class="input-group">
+          <span class="input-group-text">Display</span>
+          <vh-select
+            :source="dataJson?.config?.columns"
+            :isAll="true"
+            textAll="Choose Column"
+            fieldValue="field"
+            fieldDisplay="title"
+            v-model="dataJson.fieldDisplay"
           />
         </div>
       </div>
@@ -58,7 +65,7 @@
       </div>
       <div
         v-if="dataJson.config?.columns&&dataJson.config?.columns.length>0"
-        class="vh-height-500 p-2 border"
+        class="vh-height-400 p-2 border"
       >
         <vh-draggable
           v-model="dataJson.config.columns"
@@ -66,8 +73,11 @@
           itemKey="id"
           :forceFallback="true"
         >
-          <template #item="{element}">
-            <BuilderItem :modelValue="element" />
+          <template #item="{element,index}">
+            <BuilderItem
+              :modelValue="element"
+              @remove="removeColumn(index)"
+            />
           </template>
         </vh-draggable>
       </div>
@@ -99,7 +109,11 @@ export default {
   },
   methods: {
     addColumn() {
-      this.dataJson.config.columns.push({});
+      this.dataJson.config.columns.push({ id: new Date });
+      this.$emit('update:modelValue', this.dataJson);
+    },
+    removeColumn(element) {
+      this.dataJson.config.columns.splice(element, 1);
     },
   },
   mounted() {
@@ -115,6 +129,9 @@ export default {
     }
     if (dataJson.icon === undefined) {
       dataJson.icon = "";
+    }
+    if (dataJson.fieldDisplay === undefined) {
+      dataJson.fieldDisplay = "";
     }
     if (dataJson.config === undefined) {
       dataJson.config = {};
