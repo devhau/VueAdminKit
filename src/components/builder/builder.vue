@@ -36,8 +36,11 @@
           <span
             class="input-group-text"
             style="width:70px"
-          >icon
-            <span v-if="dataJson.icon&&dataJson.icon!=''">(<i :class="dataJson.icon" />)</span>
+          >icon<i
+              class="m-1"
+              v-if="dataJson.icon&&dataJson.icon!=''"
+              :class="dataJson.icon"
+            />
           </span>
           <vh-input
             id="data_input_title"
