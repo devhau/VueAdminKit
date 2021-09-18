@@ -65,6 +65,10 @@ const props = {
     type: Function,
     default: null
   },
+  forceFallback: {
+    type: Boolean,
+    default: false,
+  },
 
   componentData: {
     type: Object,
@@ -97,7 +101,7 @@ const draggableComponent = defineComponent({
   render() {
     try {
       this.error = false;
-      const { $slots, tag, componentData, realList, getKey, $attrs } = this;
+      const { $slots, tag, componentData, realList, getKey, $attrs, forceFallback } = this;
       let classPros = this.class;
       const componentStructure = computeComponentStructure({
         $slots,
@@ -107,6 +111,9 @@ const draggableComponent = defineComponent({
       });
       if (classPros === undefined || classPros === '' || classPros.split(' ').indexOf('vh-draggable') < 0) {
         classPros = `${classPros} vh-draggable`.trim();
+      }
+      if (forceFallback) {
+        classPros = `${classPros} vh-draggable-fallback`.trim();
       }
       this.componentStructure = componentStructure;
       const attributes = getComponentAttributes({ $attrs, componentData });
@@ -130,11 +137,11 @@ const draggableComponent = defineComponent({
       return;
     }
 
-    const { $attrs, $el, componentStructure } = this;
+    const { $attrs, $el, componentStructure, forceFallback } = this;
     componentStructure.updated();
 
     const sortableOptions = createSortableOption({
-      $attrs,
+      $attrs: { ...$attrs, forceFallback },
       callBackBuilder: {
         manageAndEmit: event => manageAndEmit.call(this, event),
         emit: event => emit.bind(this, event),
