@@ -38,7 +38,11 @@
       </div>
     </div>
     <div class="vh-builder-column col-md-6 col-sm-12">
-      <div>
+      <div class="p-2">
+        <button
+          class="btn btn-primary btn-sm"
+          @click="addColumn"
+        >Add Colum</button>
       </div>
       <div v-if="dataJson.config?.columns">
         <vh-draggable
@@ -67,7 +71,7 @@ export default {
   },
   data() {
     return {
-      dataJson: {}
+      dataJson: {},
     }
   },
   watch: {
@@ -77,6 +81,11 @@ export default {
       },
       deep: true
     }
+  },
+  methods: {
+    addColumn() {
+      this.dataJson.config.columns.push({});
+    },
   },
   mounted() {
     let dataJson = {};
@@ -95,11 +104,11 @@ export default {
     if (dataJson.config === undefined) {
       dataJson.config = {};
     }
-    if (dataJson.config.columns === undefined) {
-      dataJson.config.columns = [{ id: 1, name: 'Hello 1' }, { id: 2, name: 'Hello 2' }, { id: 3, name: 'Hello 3' }, { id: 4, name: 'Hello 4' }, { id: 5, name: 'Hello 5' }];
-    }
     if (dataJson.config.permission === undefined) {
       dataJson.config.permission = {};
+    }
+    if (dataJson.config.columns === undefined) {
+      dataJson.config.columns = [{ id: 1, name: 'Hello 1' }, { id: 2, name: 'Hello 2' }, { id: 3, name: 'Hello 3' }, { id: 4, name: 'Hello 4' }, { id: 5, name: 'Hello 5' }];
     }
     this.dataJson = dataJson;
   },

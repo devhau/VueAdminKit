@@ -11,7 +11,7 @@
     />
     <label
       v-else
-      @dblclick="showInput"
+      @click="showInput"
       v-html="labelText"
     ></label>
   </div>

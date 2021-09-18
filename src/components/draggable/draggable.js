@@ -9,6 +9,7 @@ import {
 import { computeComponentStructure } from "./core/renderHelper";
 import { events } from "./core/sortableEvents";
 import { h, defineComponent, nextTick } from "vue";
+import { isFunction } from '../../utils/class.util';
 
 function emit(evtName, evtData) {
   nextTick(() => this.$emit(evtName.toLowerCase(), evtData));
@@ -69,7 +70,10 @@ const props = {
     type: Boolean,
     default: false,
   },
-
+  disabledControl: {
+    type: [Array, Function],
+    default: ['form-control', 'form-select', 'form-check-input']
+  },
   componentData: {
     type: Object,
     required: false,
@@ -101,7 +105,7 @@ const draggableComponent = defineComponent({
   render() {
     try {
       this.error = false;
-      const { $slots, tag, componentData, realList, getKey, $attrs, forceFallback } = this;
+      const { $slots, tag, componentData, realList, getKey, $attrs, forceFallback, disabledControl } = this;
       let classPros = this.class;
       const componentStructure = computeComponentStructure({
         $slots,
@@ -115,9 +119,28 @@ const draggableComponent = defineComponent({
       if (forceFallback) {
         classPros = `${classPros} vh-draggable-fallback`.trim();
       }
+      const classDisableControl = isFunction(disabledControl) ? disabledControl() : disabledControl;
+      let disabled = false;
+      const CheckDisableControl = (e) => {
+        if (this._sortable != null) {
+          if (e.target.className.split(' ').filter((item) =>
+            [...classDisableControl].includes(item.trim())
+          ).length == 0) {
+            if (disabled != false) {
+              disabled = false;
+              this._sortable.option("disabled", disabled);
+            }
+          } else {
+            if (disabled != true) {
+              disabled = true;
+              this._sortable.option("disabled", disabled);
+            }
+          }
+        }
+      };
       this.componentStructure = componentStructure;
       const attributes = getComponentAttributes({ $attrs, componentData });
-      return componentStructure.render(h, { ...attributes, class: classPros });
+      return componentStructure.render(h, { ...attributes, class: classPros, onmousemove: CheckDisableControl });
     } catch (err) {
       this.error = true;
       return h("pre", { style: { color: "red" } }, err.stack);
