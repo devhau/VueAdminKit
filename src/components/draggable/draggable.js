@@ -72,7 +72,7 @@ const props = {
   },
   disabledControl: {
     type: [Array, Function],
-    default: ['form-control', 'form-select', 'form-check-input']
+    default: ['form-control', 'form-select', 'form-check-input', 'btn']
   },
   componentData: {
     type: Object,
