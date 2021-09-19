@@ -39,22 +39,79 @@
           <vh-input v-model="dataJson.icon" />
         </div>
       </div>
-      <div
-        class="mb-3"
-        v-if="dataJson.config?.columns&&dataJson.config?.columns.length>0"
-      >
-        <div class="input-group">
-          <span class="input-group-text">Display</span>
-          <vh-select
-            :source="dataJson?.config?.columns"
-            :isAll="true"
-            textAll="Choose Column"
-            fieldValue="field"
-            fieldDisplay="title"
-            v-model="dataJson.fieldDisplay"
-          />
+      <div v-if="dataJson.config?.columns&&dataJson.config?.columns.length>0">
+        <div class="mb-3">
+          <div class="input-group">
+            <span
+              class="input-group-text"
+              style="width:112px"
+            >Api</span>
+            <vh-input
+              v-if="dataJson?.config"
+              v-model="dataJson.config.api"
+            />
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="input-group">
+            <span
+              class="input-group-text"
+              style="width:112px"
+            >Show Index
+            </span>
+            <div class="form-control">
+              <vh-checkbox
+                v-model="dataJson.config.isIndex"
+                :falseValue="false"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="input-group">
+            <span
+              class="input-group-text"
+              style="width:112px"
+            >Show Action
+            </span>
+            <div class="form-control">
+              <vh-checkbox
+                v-model="dataJson.config.isAction"
+                :falseValue="false"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="input-group">
+            <span
+              class="input-group-text"
+              style="width:112px"
+            >FieldValue</span>
+            <vh-input
+              v-if="dataJson?.config"
+              v-model="dataJson.config.fieldValue"
+            />
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="input-group">
+            <span
+              class="input-group-text"
+              style="width:112px"
+            >FieldDisplay</span>
+            <vh-select
+              :source="dataJson?.config?.columns"
+              :isAll="true"
+              textAll="Choose Column"
+              fieldValue="field"
+              fieldDisplay="title"
+              v-model="dataJson.config.fieldDisplay"
+            />
+          </div>
         </div>
       </div>
+
     </div>
     <div class="vh-builder-column col-md-8 col-sm-12">
       <div class="p-2">
@@ -109,7 +166,7 @@ export default {
   },
   methods: {
     addColumn() {
-      this.dataJson.config.columns.push({ id: new Date });
+      this.dataJson.config.columns.push({ id: new Date().getTime() });
       this.$emit('update:modelValue', this.dataJson);
     },
     removeColumn(element) {
@@ -130,11 +187,26 @@ export default {
     if (dataJson.icon === undefined) {
       dataJson.icon = "";
     }
-    if (dataJson.fieldDisplay === undefined) {
-      dataJson.fieldDisplay = "";
-    }
     if (dataJson.config === undefined) {
       dataJson.config = {};
+    }
+    if (dataJson.config.isIndex === undefined) {
+      dataJson.config.isIndex = true;
+    }
+    if (dataJson.config.isAction === undefined) {
+      dataJson.config.isAction = true;
+    }
+    if (dataJson.config.api === undefined) {
+      dataJson.config.api = '';
+    }
+    if (dataJson.config.api === undefined) {
+      dataJson.config.api = '';
+    }
+    if (dataJson.config.fieldValue === undefined) {
+      dataJson.config.fieldValue = 'id';
+    }
+    if (dataJson.config.fieldDisplay === undefined) {
+      dataJson.config.fieldDisplay = '';
     }
     if (dataJson.config.permission === undefined) {
       dataJson.config.permission = {};

@@ -8,7 +8,7 @@ export const VHFieldInput = {
         },
         fieldType: {
             type: String,
-            default: 'text',
+            default: 'Text',
         }
     },
     setup(props, { emit, attrs }) {

@@ -26,3 +26,6 @@ export const moduleToRouter = (modules, pageDefault) => {
 
     })
 }
+export const FixJson = (obj) => {
+    return JSON.parse(JSON.stringify(obj));
+}

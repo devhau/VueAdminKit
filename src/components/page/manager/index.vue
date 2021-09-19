@@ -30,7 +30,7 @@
       </div>
       <slot name="body-extend" />
       <vh-table
-        :columns="getCloumnView"
+        :columns="getCloumnView()"
         :source="source"
         @rowclick="doEdit"
       />
@@ -43,33 +43,48 @@
 </template>
 <script>
 import { h } from 'vue';
-import pageManagerDefault from './configs';
 export default {
   name: 'vh-page-manager',
   computed: {
-    getConfig() {
-      return Object.assign(pageManagerDefault, this.module.config);
-    },
     getColumnUpdate() {
-      return this.getConfig.columns;
+      return this.moduleConfig.columns;
     },
+  },
+  props: {
+    class: {
+      type: String,
+      default: '',
+    },
+    module: {
+      default: null,
+    },
+  },
+  watch: {
+    module: {
+      handler() {
+        this.updateConfig();
+      },
+      deep: true,
+    }
+  },
+  methods: {
     getCloumnView() {
-      const { columns, isIndex, isAction } = this.getConfig;
+      const { columns } = this.moduleConfig;
       let columnViews = [];
-      if (isIndex) {
-        columnViews = [{
+      let columnIndex = undefined;
+      let columnAction = undefined;
+      if (this.moduleConfig.isIndex === true) {
+        columnIndex = {
           title: '#',
           size: 10,
           func: ({ rowIndex }) => {
             return rowIndex;
           }
-        }];
+        };
       }
 
-      columnViews = [...columnViews, ...columns?.filter((item) => item.view)];
-
-      if (isAction) {
-        columnViews = [...columnViews, {
+      if (this.moduleConfig.isAction === true) {
+        columnAction = {
           title: '',
           size: 250,
           func: () => {
@@ -91,29 +106,38 @@ export default {
               ])
             ];
           }
-        }];
+        };
       }
 
+      let columnView = columns?.filter((item) => item.view);
+      if (columnIndex !== undefined) {
+        columnViews = [...columnViews, columnIndex];
+      }
+      if (columnView !== undefined) {
+        columnViews = [...columnViews, ...columnView];
+      }
+      if (columnAction !== undefined) {
+        columnViews = [...columnViews, columnAction];
+      }
       return columnViews;
+    },
+    doEdit() {
+      alert('Edit');
+    },
+    updateConfig() {
+      let module = this.module;
+      if (module === undefined) {
+        module = {};
+      }
+      this.moduleConfig = { ...this.$configManager, ...module.config };
     }
   },
-  props: {
-    class: {
-      type: String,
-      default: '',
-    },
-    module: {
-      default: null,
-    },
-  },
-  methods: {
-    doEdit(e) {
-      console.log(e);
-      alert('helo');
-    },
+  mounted() {
+    this.updateConfig();
   },
   data() {
     return {
+      moduleConfig: {},
       source: [{}, { name: 'Nguyễn Văn Hậu' }, {}, {}]
     }
   },

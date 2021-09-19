@@ -9,11 +9,14 @@ export const VHCheckbox = {
             default: null,
         },
         value: {
+            default: true,
+        },
+        falseValue: {
             default: undefined,
         },
         checked: {
             type: Boolean,
-            default: false,
+            default: undefined,
         },
         class: {
             type: String,
@@ -29,11 +32,14 @@ export const VHCheckbox = {
         }
     },
     setup(props, { emit, attrs }) {
-        const { label, type, class: classProps, value } = props;
+        const { label, type, class: classProps, value, falseValue } = props;
 
         let className = 'form-check-input';
         className = makeTextClass(className, '', classProps, '');
         let check = ref(props.checked);
+        if (check.value === undefined) {
+            check.value = props.modelValue == value;
+        }
         // return the render function
         return () =>
             h('div', {
@@ -48,11 +54,11 @@ export const VHCheckbox = {
                         checked: check.value,
                         class: className,
                         oninput: (e) => {
-                            emit('update:modelValue', e.target.checked ? (value ?? true) : undefined);
+                            emit('update:modelValue', e.target.checked ? (value ?? true) : falseValue);
                             emit('update:checked', e.target.checked);
                         },
                         onchange: (e) => {
-                            emit('update:modelValue', e.target.checked ? (value ?? true) : undefined);
+                            emit('update:modelValue', e.target.checked ? (value ?? true) : falseValue);
                             emit('update:checked', e.target.checked);
                         },
                     },
@@ -61,7 +67,7 @@ export const VHCheckbox = {
                     class: 'form-check-label',
                     onclick: () => {
                         check.value = !check.value;
-                        emit('update:modelValue', check.value ? (value ?? true) : undefined);
+                        emit('update:modelValue', check.value ? (value ?? true) : falseValue);
                         emit('update:checked', check.value);
                     }
                 }, label)

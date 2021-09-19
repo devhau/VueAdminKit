@@ -1,7 +1,8 @@
-export default {
+export const configManager = {
     isIndex: true,
     isAction: true,
-    api: false,
+    api: '',
+    fieldValue: 'id',
     permission: {
         index: 'manager.index',
         add: 'manager.add',

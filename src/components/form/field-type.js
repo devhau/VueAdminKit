@@ -1,13 +1,13 @@
 export const FieldType = {
-    text: {
+    Text: {
         name: 'text',
         component: 'vh-input',
     },
-    checkbox: {
+    Checkbox: {
         name: 'checkbox',
         component: 'vh-checkbox',
     },
-    textarea: {
+    Textarea: {
         name: 'textarea',
         component: 'vh-textarea',
     }

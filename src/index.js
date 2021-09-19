@@ -6,17 +6,18 @@ import VHComponent from './components/';
 import systemStore from './store/system';
 import optionDefault from './config';
 import directives from './directives';
+
 import VHPageManager from './components/page/manager';
 import modules from './modules/index';
 import { FieldType } from './components/form/field-type';
-
 import { GridColumn } from './components/builder/grid-column';
+import { configManager } from './components/page/manager/configs';
 
 export default (app, option) => {
     app.use(directives);
     app.use(VHComponent);
 
-    let { menu, module, store, routes, system, FieldType: FieldType2, GridColumn: GridColumn2 } = Object.assign(optionDefault, option);
+    let { configManager: configManager2, menu, module, store, routes, system, FieldType: FieldType2, GridColumn: GridColumn2 } = Object.assign(optionDefault, option);
     module = Object.assign(modules, module);
     /**
      * Store Setting
@@ -55,5 +56,6 @@ export default (app, option) => {
     app.config.globalProperties.$system = system;
     app.config.globalProperties.$FieldType = Object.assign(FieldType, FieldType2);
     app.config.globalProperties.$GridColumn = Object.assign(GridColumn, GridColumn2);
+    app.config.globalProperties.$configManager = Object.assign(configManager, configManager2);
     app.provide('global', app.config.globalProperties);
 };

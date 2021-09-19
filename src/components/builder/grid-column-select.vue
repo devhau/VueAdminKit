@@ -2,8 +2,8 @@
   <vh-select
     :source="source"
     v-model="dataJson"
-    isAll="true"
-    textAll="Choose Column"
+    :isAll="true"
+    textAll="Choose"
   ></vh-select>
 </template>
 <script>
