@@ -44,70 +44,73 @@
           <div class="input-group">
             <span
               class="input-group-text"
-              style="width:112px"
-            >Api</span>
+              style="width:70px"
+            >API</span>
             <vh-input
               v-if="dataJson?.config"
               v-model="dataJson.config.api"
             />
           </div>
         </div>
-        <div class="mb-3">
-          <div class="input-group">
-            <span
-              class="input-group-text"
-              style="width:112px"
-            >Show Index
-            </span>
-            <div class="form-control">
-              <vh-checkbox
-                v-model="dataJson.config.isIndex"
-                :falseValue="false"
+        <div class="row">
+          <div class="mb-3 col-6">
+            <div class="input-group">
+              <span
+                class="input-group-text"
+                style="width:112px"
+              >Show Index
+              </span>
+              <div class="form-control">
+                <vh-checkbox
+                  v-model="dataJson.config.isIndex"
+                  :falseValue="false"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 col-6">
+            <div class="input-group">
+              <span
+                class="input-group-text"
+                style="width:112px"
+              >Show Action
+              </span>
+              <div class="form-control">
+                <vh-checkbox
+                  v-model="dataJson.config.isAction"
+                  :falseValue="false"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3 col-12">
+            <div class="input-group">
+              <span
+                class="input-group-text"
+                style="width:112px"
+              >FieldValue</span>
+              <vh-input
+                v-if="dataJson?.config"
+                v-model="dataJson.config.fieldValue"
               />
             </div>
           </div>
-        </div>
-        <div class="mb-3">
-          <div class="input-group">
-            <span
-              class="input-group-text"
-              style="width:112px"
-            >Show Action
-            </span>
-            <div class="form-control">
-              <vh-checkbox
-                v-model="dataJson.config.isAction"
-                :falseValue="false"
+          <div class="mb-3 col-12">
+            <div class="input-group">
+              <span
+                class="input-group-text"
+                style="width:112px"
+              >FieldDisplay</span>
+              <vh-select
+                :source="dataJson?.config?.columns"
+                :isAll="true"
+                textAll="Choose Column"
+                fieldValue="field"
+                fieldDisplay="title"
+                v-model="dataJson.config.fieldDisplay"
               />
             </div>
-          </div>
-        </div>
-        <div class="mb-3">
-          <div class="input-group">
-            <span
-              class="input-group-text"
-              style="width:112px"
-            >FieldValue</span>
-            <vh-input
-              v-if="dataJson?.config"
-              v-model="dataJson.config.fieldValue"
-            />
-          </div>
-        </div>
-        <div class="mb-3">
-          <div class="input-group">
-            <span
-              class="input-group-text"
-              style="width:112px"
-            >FieldDisplay</span>
-            <vh-select
-              :source="dataJson?.config?.columns"
-              :isAll="true"
-              textAll="Choose Column"
-              fieldValue="field"
-              fieldDisplay="title"
-              v-model="dataJson.config.fieldDisplay"
-            />
           </div>
         </div>
       </div>
@@ -195,9 +198,6 @@ export default {
     }
     if (dataJson.config.isAction === undefined) {
       dataJson.config.isAction = true;
-    }
-    if (dataJson.config.api === undefined) {
-      dataJson.config.api = '';
     }
     if (dataJson.config.api === undefined) {
       dataJson.config.api = '';
