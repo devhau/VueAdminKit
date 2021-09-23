@@ -1,16 +1,17 @@
 module.exports = {
     "env": {
-        "browser": true,
+        node: true
     },
     "extends": [
-        "eslint:recommended",
-        "plugin:vue/essential"
     ],
     "parserOptions": {
-        "sourceType": "module"
+        sourceType: "module",
+        "ecmaVersion": 5,
+        parser: 'babel-eslint'
     },
     "plugins": [
         "vue"
     ],
-    "rules": {}
+    "rules": {
+    }
 };
