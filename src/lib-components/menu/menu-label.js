@@ -1,7 +1,7 @@
-import { h } from 'vue';
+import { h, defineComponent } from 'vue';
 import { makeTextClass, } from '@/utils/class.util';
 
-export const vhMenuLabel = {
+export const vhMenuLabel = defineComponent({
     name: 'vh-menu-label',
     props: {
         class: {
@@ -42,4 +42,4 @@ export const vhMenuLabel = {
                 }, contentTitle()
             );
     }
-};
+});

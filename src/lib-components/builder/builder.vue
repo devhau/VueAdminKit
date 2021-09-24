@@ -145,8 +145,10 @@
   </div>
 </template>
 <script>
+import { defineComponent } from 'vue';
+
 import BuilderItem from './builder-item.vue';
-export default {
+export default defineComponent({
   name: 'vh-builder',
   components: { BuilderItem },
   props: {
@@ -218,5 +220,5 @@ export default {
   },
   setup() {
   },
-}
+});
 </script>

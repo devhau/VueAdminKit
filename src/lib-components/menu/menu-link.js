@@ -1,7 +1,7 @@
-import { h, resolveComponent } from 'vue';
+import { h, resolveComponent, defineComponent } from 'vue';
 import { makeTextClass } from '@/utils/class.util';
 
-export const vhMenuLink = {
+export const vhMenuLink = defineComponent({
     name: 'vh-menu-link',
     props: {
         class: {
@@ -54,4 +54,4 @@ export const vhMenuLink = {
                 }, contentTitle
             );
     }
-};
+});

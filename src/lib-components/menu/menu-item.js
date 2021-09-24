@@ -1,9 +1,7 @@
-import { h, resolveComponent } from 'vue';
+import { h, resolveComponent, defineComponent } from 'vue';
 import { makeTextClass, } from '@/utils/class.util';
-import { vhMenuLink } from './menu-link';
-import { vhMenuSub } from './menu-sub';
 
-export const vhMenuItem = {
+export const vhMenuItem = defineComponent({
     name: 'vh-menu-item',
     props: {
         class: {
@@ -40,12 +38,12 @@ export const vhMenuItem = {
 
         const children = () => {
             if (sub != null && sub.length > 0) {
-                const MenuSub = resolveComponent(vhMenuSub.name);
+                const MenuSub = resolveComponent('vh-menu-sub');
                 return h(MenuSub, {
                     icon, title, sub, level
                 });
             } else {
-                const MenuLink = resolveComponent(vhMenuLink.name);
+                const MenuLink = resolveComponent('vh-menu-link');
                 return h(MenuLink, {
                     router, icon, title
                 });
@@ -60,4 +58,4 @@ export const vhMenuItem = {
             }, children()
         );
     }
-};
+});

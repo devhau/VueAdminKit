@@ -1,8 +1,7 @@
-import { h, resolveComponent, getCurrentInstance } from 'vue';
+import { h, resolveComponent, getCurrentInstance, defineComponent } from 'vue';
 import { makeTextClass, } from '@/utils/class.util';
-import { vhMenuItem } from './menu-item';
 
-export const vhMenu = {
+export const vhMenu = defineComponent({
     name: 'vh-menu',
     props: {
         class: {
@@ -31,7 +30,7 @@ export const vhMenu = {
             className = makeTextClass(className, 'vh-menu-level', level);
         }
         level = level + 1;
-        const MenuItem = resolveComponent(vhMenuItem.name);
+        const MenuItem = resolveComponent('vh-menu-item');
         let children = () => {
             if (source && source.length > 0) {
 
@@ -73,4 +72,4 @@ export const vhMenu = {
                 children()
             );
     }
-};
+});
